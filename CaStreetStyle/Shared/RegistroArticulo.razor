@@ -1,0 +1,58 @@
+﻿@page "/registroArticulo"
+@inject IToastService toast
+@inject Services.ArticuloServices articuloServices
+@inject Services.MonedaServices monedaServices
+
+<h3>RegistroArticulo</h3>
+
+<div class="container">
+    <div class="row">
+        <EditForm Model="articulo" OnValidSubmit="Guardar">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre del articulo: </label>
+                <input @bind-value="articulo.Nombre" type="text" class="form-control">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Precio: (USD)</label>
+                <input @bind-value="articulo.Precio" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Ganancia: (DOP)</label>
+                <input @bind-value="articulo.Ganancia" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Precio del dolar: </label>
+                @foreach (var moneda in monedas)
+                {
+                    <input @bind-value="moneda.MonedaId" type="text" class="form-control" readonly placeholder="@moneda.ValorMonetario">
+                }
+            </div>
+            <button class="btn btn-primary">Guardar</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    Articulo articulo = new Articulo();
+    List<Moneda> monedas = new List<Moneda>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        monedas = await monedaServices.GetAllMonedasAsync();
+    }
+
+    private async void Guardar()
+    {
+        if (articulo != null)
+        {
+            await articuloServices.SaveArticuloAsync(articulo);
+            toast.ShowSuccess("Se ha guardado correctamente!");
+        }
+        else
+        {
+            toast.ShowError("No se pudo guardar el articulo!");
+        }
+    }
+}

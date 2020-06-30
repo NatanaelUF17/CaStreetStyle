@@ -1,0 +1,42 @@
+﻿@page "/listado"
+@inject Services.ArticuloServices services
+
+<h3>ListadoArticulos</h3>
+
+@if (articulos == null)
+{
+    <h2>No existen articulos</h2>
+}
+else
+{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ArticuloId</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Ganancia</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var articulo in articulos)
+                {
+                    <tr>
+                        <td>@articulo.ArticuloId</td>
+                        <td>@articulo.Nombre</td>
+                        <td>@articulo.Precio</td>
+                        <td>@articulo.Ganancia</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+
+@code {
+    List<Articulo> articulos = new List<Articulo>();
+
+    protected override async void OnInitialized()
+    {
+        articulos = await services.GetAllArticulosAsync();
+    }
+}

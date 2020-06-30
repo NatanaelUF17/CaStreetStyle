@@ -1,0 +1,38 @@
+﻿@page "/registroMoneda"
+@inject Services.MonedaServices services
+@inject IToastService toast
+
+<h3>RegistroMoneda</h3>
+
+<div class="container">
+    <div class="row">
+        <EditForm Model="moneda" OnValidSubmit="Guardar">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="exampleInputEmail1">Valor de la moneda: (USD -> DOP) </label>
+                <input @bind-value="moneda.ValorMonetario" type="text" class="form-control">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <button class="btn btn-primary">Guardar</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    Moneda moneda = new Moneda();
+
+    private async Task Guardar()
+    {
+        if(moneda != null)
+        {
+            await services.SaveMonedaAsync(moneda);
+            toast.ShowSuccess("Se guardo correctamente el valor monetario");
+        }
+        else
+        {
+            toast.ShowError("No se guardo la moneda!");
+        }
+    }
+
+}
