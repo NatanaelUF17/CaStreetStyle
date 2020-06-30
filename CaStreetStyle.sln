@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaStreetStyle", "CaStreetStyle\CaStreetStyle.csproj", "{DE285FC0-A425-469C-B271-7B3A513E1FBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE285FC0-A425-469C-B271-7B3A513E1FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE285FC0-A425-469C-B271-7B3A513E1FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE285FC0-A425-469C-B271-7B3A513E1FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE285FC0-A425-469C-B271-7B3A513E1FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {213A216C-18A7-49EF-B821-9368A1C93794}
+	EndGlobalSection
+EndGlobal
