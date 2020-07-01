@@ -17,10 +17,4 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Data\CaStreetStyleDb.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

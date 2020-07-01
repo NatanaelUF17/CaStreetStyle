@@ -10,7 +10,6 @@ namespace CaStreetStyle.CaStreetStyleDbContext
     public class AppDbContext : DbContext
     {
         public DbSet<Articulo> Articulos { get; set; }
-        public DbSet<Moneda> Monedas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

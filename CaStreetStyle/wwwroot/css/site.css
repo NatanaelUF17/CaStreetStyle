@@ -47,7 +47,10 @@ app {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+    background: #B2FEFA; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0ED2F7, #B2FEFA); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
     .sidebar .top-row {
@@ -79,7 +82,7 @@ app {
         }
 
         .sidebar .nav-item a {
-            color: #d7d7d7;
+            color: black;
             border-radius: 4px;
             height: 3rem;
             display: flex;
@@ -89,7 +92,7 @@ app {
 
             .sidebar .nav-item a.active {
                 background-color: rgba(255,255,255,0.25);
-                color: white;
+                color: black;
             }
 
             .sidebar .nav-item a:hover {

@@ -31,7 +31,6 @@ namespace CaStreetStyle
             services.AddServerSideBlazor();
             services.AddBlazoredToast();
             services.AddScoped<ArticuloServices>();
-            services.AddScoped<MonedaServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

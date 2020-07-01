@@ -1,5 +1,6 @@
 ﻿using CaStreetStyle.CaStreetStyleDbContext;
 using CaStreetStyle.Models;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -127,7 +128,30 @@ namespace CaStreetStyle.Services
                 return await context.Articulos.FindAsync(id);
             }
         }
+        public async Task GuardarTotal(int id, double precio, double ganancia, double articuloMoneda)
+        {
+            AppDbContext context = new AppDbContext();
+            var articuloEncontrado = context.Articulos.FindAsync(id);
+            Articulo articulo = new Articulo();
 
+            try
+            {
+                if (articuloEncontrado != null)
+                {
+                    articulo.MontoTotal = CalcularTotal(precio, ganancia, articuloMoneda);
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
         public double CalcularTotal(double precio, double ganancia, double moneda)
         {
             double total = 0;

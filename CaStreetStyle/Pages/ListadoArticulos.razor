@@ -1,7 +1,7 @@
 ﻿@page "/listado"
 @inject Services.ArticuloServices services
 
-<h3>ListadoArticulos</h3>
+<h3>Listado de Articulos</h3>
 
 @if (articulos == null)
 {
@@ -9,13 +9,16 @@
 }
 else
 {
-        <table class="table">
+        <table class="table mt-5">
             <thead>
                 <tr>
-                    <th>ArticuloId</th>
+                    <th>No. Orden</th>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Ganancia</th>
+                    <th>Tasa Moneda</th>
+                    <th>Monto Total</th>
+                    <th>Fecha de Ingreso</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +29,9 @@ else
                         <td>@articulo.Nombre</td>
                         <td>@articulo.Precio</td>
                         <td>@articulo.Ganancia</td>
+                        <td>@articulo.TasaMoneda</td>
+                        <td>@articulo.MontoTotal</td>
+                        <td>@articulo.FechaIngreso</td>
                     </tr>
                 }
             </tbody>

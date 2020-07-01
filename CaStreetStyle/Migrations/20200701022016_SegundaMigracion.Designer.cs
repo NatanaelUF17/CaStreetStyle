@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaStreetStyle.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200630011603_PrimeraMigracion")]
-    partial class PrimeraMigracion
+    [Migration("20200701022016_SegundaMigracion")]
+    partial class SegundaMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,11 +24,14 @@ namespace CaStreetStyle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("FechaIngreso")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("Ganancia")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("MonedaId")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("MontoTotal")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
@@ -36,32 +39,12 @@ namespace CaStreetStyle.Migrations
                     b.Property<double>("Precio")
                         .HasColumnType("REAL");
 
-                    b.HasKey("ArticuloId");
-
-                    b.HasIndex("MonedaId");
-
-                    b.ToTable("Articulos");
-                });
-
-            modelBuilder.Entity("CaStreetStyle.Models.Moneda", b =>
-                {
-                    b.Property<int>("MonedaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("ValorMonetario")
+                    b.Property<double>("TasaMoneda")
                         .HasColumnType("REAL");
 
-                    b.HasKey("MonedaId");
+                    b.HasKey("ArticuloId");
 
-                    b.ToTable("Monedas");
-                });
-
-            modelBuilder.Entity("CaStreetStyle.Models.Articulo", b =>
-                {
-                    b.HasOne("CaStreetStyle.Models.Moneda", "Moneda")
-                        .WithMany()
-                        .HasForeignKey("MonedaId");
+                    b.ToTable("Articulos");
                 });
 #pragma warning restore 612, 618
         }

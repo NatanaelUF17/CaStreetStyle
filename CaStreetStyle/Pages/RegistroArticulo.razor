@@ -1,33 +1,32 @@
 ﻿@page "/registroArticulo"
 @inject IToastService toast
 @inject Services.ArticuloServices articuloServices
-@inject Services.MonedaServices monedaServices
 
-<h3>RegistroArticulo</h3>
+<h3>Registro de Articulo</h3>
 
-<div class="container">
+<div class="container mt-3">
     <div class="row">
         <EditForm Model="articulo" OnValidSubmit="Guardar">
             <DataAnnotationsValidator />
             <div class="form-group">
-                <label for="exampleInputEmail1">Nombre del articulo: </label>
+                <label for="Articulo">Nombre del articulo: </label>
                 <input @bind-value="articulo.Nombre" type="text" class="form-control">
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Precio: (USD)</label>
+                <label for="Precio">Precio: (USD)</label>
                 <input @bind-value="articulo.Precio" type="text" class="form-control">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Ganancia: (DOP)</label>
+                <label for="Ganancia">Ganancia: (DOP)</label>
                 <input @bind-value="articulo.Ganancia" type="text" class="form-control">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Precio del dolar: </label>
-                @foreach (var moneda in monedas)
-                {
-                    <input @bind-value="moneda.MonedaId" type="text" class="form-control" readonly placeholder="@moneda.ValorMonetario">
-                }
+                <label for="Tasa de la moneda">Precio del dolar: </label>
+                <input @bind-value="@articulo.TasaMoneda" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Monto">Monto Total: </label>
+                <input @bind="@articulo.MontoTotal" type="text" class="form-control" readonly>
             </div>
             <button class="btn btn-primary">Guardar</button>
         </EditForm>
@@ -36,17 +35,13 @@
 
 @code {
     Articulo articulo = new Articulo();
-    List<Moneda> monedas = new List<Moneda>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        monedas = await monedaServices.GetAllMonedasAsync();
-    }
+    private string articuloId = string.Empty;
 
     private async void Guardar()
     {
         if (articulo != null)
         {
+
             await articuloServices.SaveArticuloAsync(articulo);
             toast.ShowSuccess("Se ha guardado correctamente!");
         }
@@ -54,5 +49,13 @@
         {
             toast.ShowError("No se pudo guardar el articulo!");
         }
+    }
+
+    private async void Calcular()
+    {
+        articulo.ArticuloId = Convert.ToInt32(articuloId);
+
+        await articuloServices.SaveArticuloAsync(articulo);
+        await articuloServices.GuardarTotal(articulo.ArticuloId, articulo.Precio, articulo.Ganancia, articulo.TasaMoneda);
     }
 }
