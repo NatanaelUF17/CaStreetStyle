@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: PT Serif;
 }
 
 a, .btn-link {
@@ -44,6 +44,12 @@ app {
 .main .top-row a:first-child {
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.sidebar-custom {
+    
+    height: auto !important;
+    width: auto !important;
 }
 
 .sidebar {
