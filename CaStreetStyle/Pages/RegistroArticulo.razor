@@ -4,43 +4,50 @@
 
 <h3>Registro de Articulo</h3>
 
-<div class="container mt-3">
+<div class="container mt-3 text-center">
     <div class="row">
         <EditForm Model="articulo" OnValidSubmit="Guardar">
             <DataAnnotationsValidator />
             <div class="form-group">
                 <label for="Articulo">Nombre del articulo: </label>
-                <input @bind-value="articulo.Nombre" type="text" class="form-control">
+                <input @bind-value="articulo.Nombre" type="text" class="form-control" />
+                <ValidationMessage For="(() => articulo.Nombre)" />
             </div>
             <div class="form-group">
                 <label for="Precio">Precio: (USD)</label>
-                <input @bind-value="articulo.Precio" @onfocusout="Calcular" type="text" class="form-control">
+                <input @bind-value="articulo.Precio" @onfocusout="Calcular" type="number" class="form-control" />
+                <ValidationMessage For="(() => articulo.Precio)" />
             </div>
             <div class="form-group">
                 <label for="Ganancia">Ganancia: (DOP)</label>
-                <input @bind-value="articulo.Ganancia" @onfocusout="Calcular" type="text" class="form-control">
+                <input @bind-value="articulo.Ganancia" @onfocusout="Calcular" type="number" class="form-control">
+                <ValidationMessage For="(() => articulo.Ganancia)" />
             </div>
             <div class="form-group">
                 <label for="Tasa de la moneda">Precio del dolar: </label>
-                <input @bind-value="@articulo.TasaMoneda" @onfocusout="Calcular" type="text" class="form-control">
+                <input @bind-value="@articulo.TasaMoneda" @onfocusout="Calcular" type="number" class="form-control" step=".01">
+                <ValidationMessage For="(() => articulo.TasaMoneda)" />
             </div>
             <div class="form-group">
                 <label for="Monto">Monto Total: </label>
-                <input @bind-value="@articulo.MontoTotal" type="text" class="form-control" readonly>
+                <input @bind-value="@articulo.MontoTotal" type="number" class="form-control" readonly />
+                <ValidationMessage For="(() => articulo.MontoTotal)" />
             </div>
-            <button class="btn btn-primary">Guardar</button>
-        </EditForm>
-        <div class="form-group">
-        <label for="Ganancia Aumentada">Ganancia Aumentada: </label>
-        <input @bind-value="gananciaAumentada" type="text" class="form-control" />
-        <button @onclick="AumentarGanancia">Aumentar Ganancia</button>
-    </div>
+            <div class="form-group">
+                <label for="Ganancia Aumentada">Ganancia Aumentada: </label>
+                <input @bind-value="@articulo.GananciaAumentada" type="text" class="form-control" />
+                <ValidationMessage For="(() => articulo.GananciaAumentada)" />
+            </div>
+            <div class="form-group" style="display:inline-block">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-primary" @onclick="AumentarGanancia">Aumentar Ganancia</button>
+            </div>   
+        </EditForm>  
     </div>
 </div>
 
 @code {
     Articulo articulo = new Articulo();
-    private double gananciaAumentada = 0;
 
     private async void Guardar()
     {
@@ -63,6 +70,6 @@
 
     private void AumentarGanancia()
     {
-        articulo.MontoTotal = articulo.MontoTotal + gananciaAumentada;
+        articulo.MontoTotal = articulo.MontoTotal + articulo.GananciaAumentada;
     }
 }

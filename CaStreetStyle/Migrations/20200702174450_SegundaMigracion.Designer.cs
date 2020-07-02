@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaStreetStyle.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200701022016_SegundaMigracion")]
+    [Migration("20200702174450_SegundaMigracion")]
     partial class SegundaMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,20 +27,23 @@ namespace CaStreetStyle.Migrations
                     b.Property<DateTime>("FechaIngreso")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Ganancia")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Ganancia")
+                        .HasColumnType("TEXT");
 
-                    b.Property<double>("MontoTotal")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("GananciaAumentada")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("MontoTotal")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Precio")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("TEXT");
 
-                    b.Property<double>("TasaMoneda")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("TasaMoneda")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticuloId");
 

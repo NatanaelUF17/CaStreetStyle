@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CaStreetStyle.Migrations
 {
@@ -7,17 +6,17 @@ namespace CaStreetStyle.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "FechaIngreso",
+            migrationBuilder.AddColumn<decimal>(
+                name: "GananciaAumentada",
                 table: "Articulos",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValue: 0m);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FechaIngreso",
+                name: "GananciaAumentada",
                 table: "Articulos");
         }
     }

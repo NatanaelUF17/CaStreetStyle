@@ -128,7 +128,7 @@ namespace CaStreetStyle.Services
                 return await context.Articulos.FindAsync(id);
             }
         }
-        public async Task GuardarTotal(int id, double precio, double ganancia, double articuloMoneda)
+        public async Task GuardarTotal(int id, decimal precio, decimal ganancia, decimal articuloMoneda)
         {
             AppDbContext context = new AppDbContext();
             var articuloEncontrado = context.Articulos.FindAsync(id);
@@ -152,9 +152,9 @@ namespace CaStreetStyle.Services
                 context.Dispose();
             }
         }
-        public double CalcularTotal(double precio, double ganancia, double moneda)
+        public decimal CalcularTotal(decimal precio, decimal ganancia, decimal moneda)
         {
-            double total = 0;
+            decimal total;
 
             total = ((precio * moneda) + ganancia);
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CaStreetStyle.Migrations
 {
@@ -13,10 +14,11 @@ namespace CaStreetStyle.Migrations
                     ArticuloId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(nullable: true),
-                    Precio = table.Column<double>(nullable: false),
-                    Ganancia = table.Column<double>(nullable: false),
-                    TasaMoneda = table.Column<double>(nullable: false),
-                    MontoTotal = table.Column<double>(nullable: false)
+                    Precio = table.Column<decimal>(nullable: false),
+                    Ganancia = table.Column<decimal>(nullable: false),
+                    FechaIngreso = table.Column<DateTime>(nullable: false),
+                    TasaMoneda = table.Column<decimal>(nullable: false),
+                    MontoTotal = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
