@@ -14,28 +14,33 @@
             </div>
             <div class="form-group">
                 <label for="Precio">Precio: (USD)</label>
-                <input @bind-value="articulo.Precio" type="text" class="form-control">
+                <input @bind-value="articulo.Precio" @onfocusout="Calcular" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label for="Ganancia">Ganancia: (DOP)</label>
-                <input @bind-value="articulo.Ganancia" type="text" class="form-control">
+                <input @bind-value="articulo.Ganancia" @onfocusout="Calcular" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label for="Tasa de la moneda">Precio del dolar: </label>
-                <input @bind-value="@articulo.TasaMoneda" type="text" class="form-control">
+                <input @bind-value="@articulo.TasaMoneda" @onfocusout="Calcular" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label for="Monto">Monto Total: </label>
-                <input @bind="@articulo.MontoTotal" type="text" class="form-control" readonly>
+                <input @bind-value="@articulo.MontoTotal" type="text" class="form-control" readonly>
             </div>
             <button class="btn btn-primary">Guardar</button>
         </EditForm>
+        <div class="form-group">
+        <label for="Ganancia Aumentada">Ganancia Aumentada: </label>
+        <input @bind-value="gananciaAumentada" type="text" class="form-control" />
+        <button @onclick="AumentarGanancia">Aumentar Ganancia</button>
+    </div>
     </div>
 </div>
 
 @code {
     Articulo articulo = new Articulo();
-    private string articuloId = string.Empty;
+    private double gananciaAumentada = 0;
 
     private async void Guardar()
     {
@@ -51,11 +56,13 @@
         }
     }
 
-    private async void Calcular()
+    private void Calcular()
     {
-        articulo.ArticuloId = Convert.ToInt32(articuloId);
+        articulo.MontoTotal = articuloServices.CalcularTotal(articulo.Precio, articulo.Ganancia, articulo.TasaMoneda);
+    }
 
-        await articuloServices.SaveArticuloAsync(articulo);
-        await articuloServices.GuardarTotal(articulo.ArticuloId, articulo.Precio, articulo.Ganancia, articulo.TasaMoneda);
+    private void AumentarGanancia()
+    {
+        articulo.MontoTotal = articulo.MontoTotal + gananciaAumentada;
     }
 }
