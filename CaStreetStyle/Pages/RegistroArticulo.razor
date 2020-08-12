@@ -5,23 +5,21 @@
 <h3>Registro de Articulo</h3>
 
 <div class="container mt-3 text-center">
-    <div class="row">
-        <EditForm Model="articulo" OnValidSubmit="Guardar">
+    <div class="row text-center">
+        <EditForm Model="articulo" OnValidSubmit="Guardar" style="display:inline-block">
             <DataAnnotationsValidator />
             <div class="form-group">
-                <label for="Articulo">Nombre del articulo: </label>
-                <input @bind-value="articulo.Nombre" type="text" class="form-control" />
+                <MatTextField @bind-Value="articulo.Nombre" Type="text" Label="Nombre del articulo" Class="form-control" Style="border:none; border-radius:0;"/>
                 <ValidationMessage For="(() => articulo.Nombre)" />
             </div>
             <div class="form-group">
-                <label for="Precio">Precio: (USD)</label>
-                <input @bind-value="articulo.Precio" @onfocusout="Calcular" type="number" class="form-control" />
+                <MatTextField @bind-Value="articulo.Precio" Type="number" Label="Precio (USD)" Class="form-control" Style="border:none; border-radius:0;"/>
                 <ValidationMessage For="(() => articulo.Precio)" />
             </div>
             <div class="form-group">
                 <label for="Ganancia">Ganancia: (DOP)</label>
                 <input @bind-value="articulo.Ganancia" @onfocusout="Calcular" type="number" class="form-control">
-                <ValidationMessage For="(() => articulo.Ganancia)" />
+              
             </div>
             <div class="form-group">
                 <label for="Tasa de la moneda">Precio del dolar: </label>
@@ -38,16 +36,22 @@
                 <input @bind-value="@articulo.GananciaAumentada" type="text" class="form-control" />
                 <ValidationMessage For="(() => articulo.GananciaAumentada)" />
             </div>
+            <MatButton Type="button" Outlined="true" Label="Editar"></MatButton>
             <div class="form-group" style="display:inline-block">
                 <button type="submit" class="btn btn-success">Guardar</button>
                 <button type="button" class="btn btn-primary" @onclick="AumentarGanancia">Aumentar Ganancia</button>
-            </div>   
+            </div>
         </EditForm>  
     </div>
 </div>
 
 @code {
     Articulo articulo = new Articulo();
+
+    void Prueba()
+    {
+        Console.WriteLine("console.log('prueba')");
+    }
 
     private async void Guardar()
     {
